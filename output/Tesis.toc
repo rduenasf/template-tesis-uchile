@@ -1,8 +1,0 @@
-\select@language {spanish}
-\select@language {latin}
-\contentsline {chapter}{Resumen Ejecutivo}{i}{section*.2}
-\contentsline {chapter}{Agradecimientos}{iii}{section*.5}
-\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
-\contentsline {chapter}{Cap\IeC {\'\i }tulo Adicional que no es ap\IeC {\'e}ndice}{2}{section*.14}
-\contentsline {chapter}{Ap\IeC {\'e}ndices}{3}{section*.16}
-\contentsline {section}{\numberline { A }Tweets}{3}{section.1.1}
