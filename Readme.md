@@ -40,4 +40,7 @@
 * **`\pais`**: País
 * **`\ciudad`**: Ciudad
 * **`\yearpub`**: Año de publicación
-* **`\monthpub`**: Mes de publicación
+* **`\monthpub`**: Mes de publicación   
+
+## Agradecimientos
+La mayor parte del crédito corresponde a Sebastián Kreft por sentar las bases para el template. También a Alvaro Echeverría por arreglar varios bugs y agregar funcionalidades.
