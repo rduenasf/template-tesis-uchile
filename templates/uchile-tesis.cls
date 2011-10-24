@@ -43,9 +43,9 @@
 \DeclareOption{notodo}{\@uchiletesis@showtodolistfalse}
 
 % Logo
-\DeclareOption{colorlogo}{\gdef\@logofile{escudocolor}}
-\DeclareOption{bwlogo}{\gdef\@logofile{escudo}}
-\ExecuteOptions{colorlogo}
+\newif{\if@uchiletesis@bwlogo}
+\@uchiletesis@bwlogofalse
+\DeclareOption{bwlogo}{\@uchiletesis@bwlogotrue}
 
 % Spacing
 \DeclareOption{singlespace}{\gdef\@space{1.0}}%Espacio Simple
@@ -74,11 +74,11 @@
 
 % hyperref - Pdftex hypertext
 \usepackage[
-	colorlinks=true
-	, unicode=true
-	, pdftex
-	, pdfborderstyle={/S/U/W 0}
-	, pdfusetitle
+    colorlinks=true
+    , unicode=true
+    , pdftex
+    , pdfborderstyle={/S/U/W 0}
+    , pdfusetitle
 ]{hyperref}
 
 % cite - must go after hyperref, used to add cite references
@@ -91,7 +91,13 @@
 \else
 \usepackage[disable]{todonotes}
 \fi
-			
+
+\if@uchiletesis@bwlogo
+\gdef\@logofile{escudo}
+\else
+\gdef\@logofile{escudocolor}
+\fi
+
 %%%%%%%%%%%%%%%%%%%%%%
 %Constants used in the class
 %%%%%%%%%%%%%%%%%%%%%%
@@ -102,71 +108,71 @@
 
 % Portada
 \renewcommand{\maketitle}{%
-	\thispagestyle{empty}
-	\renewcommand{\baselinestretch}{1}
-	\begin{tabular}{ll}
-		\multirow{3}{*}{\includegraphics[height=84pt,width=42pt]{\@logofile}}
-		&\\
-		&\large{\MakeUppercase{Universidad de Chile}}\\
-		&\large{\MakeUppercase{\@facultad}}\\
-		&\large{\MakeUppercase{\@departamento}}\\
-		&\\
-	\end{tabular}
-	\begin{center}
-		\vskip 1.75cm%
-			{\large \MakeUppercase{\@title}}\\
-		\vskip 1.75cm%
-			{\large \MakeUppercase{\@trabajoygrado}}\\
-		\ifx \@trabajoysubgrado \undefined
-			\vskip 0.33cm
-			\vskip 0.75cm
-			\vskip 11pt
-		\else		
-			\vskip 0.75cm
-				{\large \MakeUppercase{\@trabajoysubgrado}}\\
-		\fi		
-		\vskip 1.75cm%
-			{\large \MakeUppercase{\@author}}\\
-		\vskip 1.0cm%
-			\MakeUppercase{Profesor guía:}\\
-			\MakeUppercase{\@profguia}\\
-		\vskip 0.75cm
-			\MakeUppercase{Miembros de la Comisión:}\\
-			\MakeUppercase{\@profcoguia}\\
-			\MakeUppercase{\@profint}\\
-			\ifx \@profinta \undefined
-				\vskip 0.33cm
-				\vskip 11pt
-			\else
-				\MakeUppercase{\@profinta}\\
-			\fi
-			\ifx \@profintb \undefined
-				\vskip 0.33cm
-				\vskip 11pt
-			\else
-				\MakeUppercase{\@profintb}\\
-			\fi
-		\vskip 0.75cm%
-			\begin{small}
-				\MakeUppercase{\@ciudad{} de \@pais}\\
-				\MakeUppercase{\@month{} \@year}\\
-			\end{small}
-		\vskip 1cm%
-			\ifx \@proyecto \undefined
-				{}
-			\else
-				\begin{footnotesize}
-					\begin{tabular}{c}
-					    \hline
-						\\
-						\@proyecto\\
-						\\
-					    \hline
-					\end{tabular}
-				\end{footnotesize}
-			\fi
-	\end{center}
-	\newpage
+    \thispagestyle{empty}
+    \renewcommand{\baselinestretch}{1}
+    \begin{tabular}{ll}
+        \multirow{3}{*}{\includegraphics[height=84pt,width=42pt]{\@logofile}}
+        &\\
+        &\large{\MakeUppercase{Universidad de Chile}}\\
+        &\large{\MakeUppercase{\@facultad}}\\
+        &\large{\MakeUppercase{\@departamento}}\\
+        &\\
+    \end{tabular}
+    \begin{center}
+        \vskip 1.75cm%
+            {\large \MakeUppercase{\@title}}\\
+        \vskip 1.75cm%
+            {\large \MakeUppercase{\@trabajoygrado}}\\
+        \ifx \@trabajoysubgrado \undefined
+            \vskip 0.33cm
+            \vskip 0.75cm
+            \vskip 11pt
+        \else
+            \vskip 0.75cm
+                {\large \MakeUppercase{\@trabajoysubgrado}}\\
+        \fi
+        \vskip 1.75cm%
+            {\large \MakeUppercase{\@author}}\\
+        \vskip 1.0cm%
+            \MakeUppercase{Profesor guía:}\\
+            \MakeUppercase{\@profguia}\\
+        \vskip 0.75cm
+            \MakeUppercase{Miembros de la Comisión:}\\
+            \MakeUppercase{\@profcoguia}\\
+            \MakeUppercase{\@profint}\\
+            \ifx \@profinta \undefined
+                \vskip 0.33cm
+                \vskip 11pt
+            \else
+                \MakeUppercase{\@profinta}\\
+            \fi
+            \ifx \@profintb \undefined
+                \vskip 0.33cm
+                \vskip 11pt
+            \else
+                \MakeUppercase{\@profintb}\\
+            \fi
+        \vskip 0.75cm%
+            \begin{small}
+                \MakeUppercase{\@ciudad{} de \@pais}\\
+                \MakeUppercase{\@month{} \@year}\\
+            \end{small}
+        \vskip 1cm%
+            \ifx \@proyecto \undefined
+                {}
+            \else
+                \begin{footnotesize}
+                    \begin{tabular}{c}
+                        \hline
+                        \\
+                        \@proyecto\\
+                        \\
+                        \hline
+                    \end{tabular}
+                \end{footnotesize}
+            \fi
+    \end{center}
+    \newpage
 }
 
 %% Cambiamos section cuando estamos en el prefacio
@@ -215,13 +221,13 @@
 
 % Insertar grafica
 \newcommand{\grafica}[4]{
-	\begin{figure}[!ht]
-		\begin{center}
-			\includegraphics[scale=#4]{#1}\\
-		\end{center}
-		\caption{{\small #2}}
-		\label{#3}
-	\end{figure}
+    \begin{figure}[!ht]
+        \begin{center}
+            \includegraphics[scale=#4]{#1}\\
+        \end{center}
+        \caption{{\small #2}}
+        \label{#3}
+    \end{figure}
 }
 
 %%%%%%%%%%%%%%%%%
@@ -231,62 +237,62 @@
 \let\oldbiblio=\bibliography
 %redefine the bibliography in order to get the names we want and listed in the index
 \renewcommand{\bibliography}[2]{
-	%add it to the index
-	\cleardoublepage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{\bibliographyname}
-	%change the name to what we want
-	\renewcommand{\bibname}{\bibliographyname}
-	%call the old bibilo command
-	\oldbiblio{#1}{#2}
+    %add it to the index
+    \cleardoublepage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\bibliographyname}
+    %change the name to what we want
+    \renewcommand{\bibname}{\bibliographyname}
+    %call the old bibilo command
+    \oldbiblio{#1}{#2}
 \newpage
 }
 
 \newcommand{\dedicatoria}[1]{
-	\newpage
-	\thispagestyle{empty}
-	\subsubsection*{}
-	\vskip 5cm
-	\begin{flushright}
-		\emph{#1}
-	\end{flushright}
+    \newpage
+    \thispagestyle{empty}
+    \subsubsection*{}
+    \vskip 5cm
+    \begin{flushright}
+        \emph{#1}
+    \end{flushright}
 }
 
 
 % Comandos personalizados para el paquete todonotes
 \if@uchiletesis@showtodolist
 % fillup - agregar un comentario rojo señalando que hay que llenar un texto
-	\newcommand{\fillup}[1]{%
-		\todo[color=red!20!white, inline, caption={Completar sección \thesubsection{}}]{%
-		\begin{minipage}{\linewidth}\Blindtext[#1][1]\end{minipage}%
-		}%
-	}
-	
-% missing reg - agregar "citation needed " todos	
-	\newcounter{missingReferenceItems}
-	\addtocounter{missingReferenceItems}{1}
-	\newcommand{\missingref}[2][]{%
-    	\renewcommand{\@todonotes@text}{#2}%
-	    \renewcommand{\@todonotes@caption}{\protect\hypertarget{todo\themissingReferenceItems}{}\textbf{Agregar referencia:} #2}%
-	    \setkeys{todonotes}{noline, color=green!40, #1}%
-	    \if@todonotes@localdisable%
-    	\else%
-        	\addtocounter{@todonotes@numberoftodonotes}{1}%
-	        \if@todonotes@appendtolistoftodos%
-    	        \phantomsection%
-        	    \if@todonotes@captiongiven%
-            	\else%
-                	\renewcommand{\@todonotes@caption}{\protect\hypertarget{todo:missingref:\themissingReferenceItems}{}\textbf{Agregar referencia \#\themissingReferenceItems:} #2}%
-	            \fi%
-    	        \@todonotes@addElementToListOfTodos
-        	\fi%
-			\textbf{\hyperlink{todo:missingref:\themissingReferenceItems}{[\themissingReferenceItems]}}%
-			\addtocounter{missingReferenceItems}{1}%
-		\fi}%
+    \newcommand{\fillup}[1]{%
+        \todo[color=red!20!white, inline, caption={Completar sección \thesubsection{}}]{%
+        \begin{minipage}{\linewidth}\Blindtext[#1][1]\end{minipage}%
+        }%
+    }
+
+% missing reg - agregar "citation needed " todos
+    \newcounter{missingReferenceItems}
+    \addtocounter{missingReferenceItems}{1}
+    \newcommand{\missingref}[2][]{%
+        \renewcommand{\@todonotes@text}{#2}%
+        \renewcommand{\@todonotes@caption}{\protect\hypertarget{todo\themissingReferenceItems}{}\textbf{Agregar referencia:} #2}%
+        \setkeys{todonotes}{noline, color=green!40, #1}%
+        \if@todonotes@localdisable%
+        \else%
+            \addtocounter{@todonotes@numberoftodonotes}{1}%
+            \if@todonotes@appendtolistoftodos%
+                \phantomsection%
+                \if@todonotes@captiongiven%
+                \else%
+                    \renewcommand{\@todonotes@caption}{\protect\hypertarget{todo:missingref:\themissingReferenceItems}{}\textbf{Agregar referencia \#\themissingReferenceItems:} #2}%
+                \fi%
+                \@todonotes@addElementToListOfTodos
+            \fi%
+            \textbf{\hyperlink{todo:missingref:\themissingReferenceItems}{[\themissingReferenceItems]}}%
+            \addtocounter{missingReferenceItems}{1}%
+        \fi}%
 \else
 % fillup - agregar un comentario rojo señalando que hay que llenar un texto
-	\newcommand{\fillup}[2][]{}
-	
-% missing reg - agregar "citation needed " todos	
-	\newcommand{\missingref}[2][]{}
+    \newcommand{\fillup}[2][]{}
+
+% missing reg - agregar "citation needed " todos
+    \newcommand{\missingref}[2][]{\textbf{[?]}}
 \fi
