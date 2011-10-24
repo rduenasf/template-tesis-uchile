@@ -1,20 +1,20 @@
 # Template para LaTeX de Tesis y Memoria Universidad de Chile
 
 ## Paquetes utilizados
-* amsmath
-* amssymb
-* amsthm
-* babel
-* blindtext
-* cite
-* geometry
-* graphicx
-* inputenc
-* hyperref
-* multirow
-* subfig
-* todonotes
-* xspace
+* [amsmath](http://ctan.org/pkg/amsmath/)
+* [amssymb](http://ctan.org/pkg/amssymb/)
+* [amsthm](http://ctan.org/pkg/amsthm/)
+* [babel](http://ctan.org/pkg/babel/)
+* [blindtext](http://ctan.org/pkg/blindtext/)
+* [cite](http://ctan.org/pkg/cite/)
+* [geometry](http://ctan.org/pkg/geometry/)
+* [graphicx](http://ctan.org/pkg/graphicx/)
+* [inputenc](http://ctan.org/pkg/inputenc/)
+* [hyperref](http://ctan.org/pkg/hyperref/)
+* [multirow](http://ctan.org/pkg/multirow/)
+* [subfig](http://ctan.org/pkg/subfig/)
+* [todonotes](http://ctan.org/pkg/todonotes/)
+* [xspace](http://www.ctan.org/pkg/xspace)
 
 ## Opciones extra
 * **`notodo`**: oculta la lista de tareas pendientes y todas las tareas en el cuerpo del documento (a excepción de las citas faltantes)
